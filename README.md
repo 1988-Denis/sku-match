@@ -46,3 +46,4 @@ Vercel сам выпустит SSL-сертификат.
 - Промпт и логика подбора — внутри `index.html`, переменная `systemPrompt`
 - Модель — в `api/find-part.js`, строка `modelUri` (можно заменить на
   `yandexgpt-lite/latest` для более дешёвых запросов)
+"# sku-match" 
