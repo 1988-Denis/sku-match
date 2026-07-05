@@ -245,7 +245,7 @@
   <div class="pm-wrap">
     <div class="pm-eyebrow">Прототип — определитель детали</div>
     <h1 class="pm-h1">Опишите, что сломалось<span> — агент найдёт нужную деталь</span></h1>
-    <p class="pm-sub">Работает на реальном каталоге вашего магазина (68 позиций из выгрузки заказов). Опишите бренд, модель или симптом — своими словами, как покупатель.</p>
+    <p class="pm-sub">Работает на реальном каталоге вашего магазина (104 позиции ассортимента). Опишите бренд, модель или симптом — своими словами, как покупатель.</p>
 
     <div class="pm-panel">
       <label class="pm-label">Описание проблемы</label>
@@ -313,7 +313,11 @@ ${catalogText}
       body: JSON.stringify({ system: systemPrompt, query: query })
     });
     const data = await response.json();
-    if(!response.ok){ throw new Error(data.error || 'server error'); }
+    if(!response.ok){
+      statusEl.innerHTML = '<div class="pm-error">Ошибка сервера: ' + escapeHtml(data.error || '') + '<br>' + escapeHtml(data.details || '') + '</div>';
+      btn.disabled = false;
+      return;
+    }
     const text = data.text || '';
     const clean = text.replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(clean);
